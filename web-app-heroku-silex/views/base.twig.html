@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html>
+
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="{{ app.request.basepath }}/lib/chart/Chart.js"></script>
+        <link href="{{ app.request.basepath }}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="{{ app.request.basepath }}/css/style.css" rel="stylesheet">
+
+        <title>LoanApproval :{% block title %}{% endblock %}</title>
+        {% endblock %}
+
+    </head>
+
+    <body>
+        <div class="container">
+
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+
+                <div class="container">
+
+                    <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+
+                            <span class="icon-bar"></span>
+
+                            <span class="icon-bar"></span>
+
+                            <span class="icon-bar"></span>
+
+                        </button>
+
+                        <a class="navbar-brand" href="{{ app.request.basepath }}/index.php">LoanApproval</a>
+
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbar-collapse-target">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="{{ app.request.basepath }}/index.php">AccManager</a></li>
+                            <li><a href="{{ app.request.basepath }}/index.php/appmanager">AppManager</a></li>
+                            <li><a href="{{ app.request.basepath }}/index.php/approval">Approval</a></li>
+                        </ul>
+
+                    </div>
+
+                </div><!-- /.container -->
+
+            </nav>
+
+
+            <article>
+                {% block content %}
+                {% endblock %}
+            </article>
+
+
+            <footer class="footer">
+                {% block footer %}
+                <a href="#" >Khettab Myriam - Gil Maxime - Loan Approval</a> 
+                {% endblock%}
+            </footer>
+
+        </div>
+
+    </body>
+
+</html>

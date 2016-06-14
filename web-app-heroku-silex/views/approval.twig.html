@@ -1,0 +1,31 @@
+{% extends "base.twig.html" %}
+{% block title %} Home{% endblock %}
+{% block content %}
+
+<p> <center><h1>Approval</h1></center>
+
+<blockquote class="blockquote-reverse">
+    <h2> Approval</h2>
+    
+   <h2> Request Approval</h2>
+        <form action="{{ app.request.basepath }}/index.php/approval/post" method="post" class="form-inline">
+    <table class="table">
+            {{ form_errors(form) }}
+            <tr>
+                <td><label for="name">Name :  </label></td>
+                <td>{{ form_row(form.name, {'attr' : {'class' : 'form-control'}, 'label' : ' ' } )  }}</td>
+            </tr>
+                        <tr>
+                <td><label for="name">Amount :  </label></td>
+                <td>{{ form_row(form.amount, {'attr' : {'class' : 'form-control'}, 'label' : ' ' } )  }}</td>
+            </tr>
+            <tr>
+                <td><button id="submit" type="submit" class="btn btn-primary">Request Approval</button></td>
+            </tr>
+            {{ form_rest(form) }}
+        </div>
+    </table>
+</form>
+       
+</blockquote>
+</p>{% endblock %}

@@ -1,0 +1,193 @@
+/--------------------------------Modifications------------------------------/
+
+Admin:
+Ajout d'un chart 
+Récupération des requestPerDay
+
+TaskResource (API ressource) :
+Sécurisation de la partie de l'API (faire attention qu'un utilisateur soit bien autorisé à faire telle ou telle action en fonction de son board)
+Exemple : Un utilisateur pouvait changer l'ID d'une Task et accéder aux informations d'une autre task >>>>> potentiellement dangereux
+(Deux jours - 18-19 février)
+22 février tests de la sécurité sur cette API
+Test dans plusieurs cas(Admin,User,Viewer,Anonymous) canWrite et canRead(qui renvoie un boolean)
+
+TaskDetails :
+Ajout d'un message d'erreur lorsqu'une erreur 401 est renvoyée (en rapport avec l'ancien problème de sécurité) (22 février)
+
+DueDate :
+Changer la date de rendu (j'ai mis -7) (23 février)
+
+TaskAssignedToMe:
+Changer la mise en forme pour savoir quel board est associé à la tâche (23 février)
+<div rel="popover" data-content="{{data.content}}" ng-mouseenter="loadLastComment(task.id)"  ng-mouseleave="hoverOut()"  data-original-title="test <b> test </b>">Salut</div>
+                                
+TaskCount:
+Permettre la supression des statistiques, pour tout remettre à ZERO.
+(24 février)
+Tests réalisés le 25 février
+
+Résolution d'un bug TaskCount sur un Kanban précis.. ADV Kanban -----> réglé par Julien Brunet
+
+Fichier excel : "Excel report" modifié pour afficher le titre de la carte 
+
+26 février matinée :
+Pas de news donc tente d'implémenter d'une façon ou d'une autre le mention (angular-ui) pour avoir tag comme facebook @nom
+UI mention fonctionne dans TaskDetails mais il faut réussir à l'implementer dans la balise text-angular (lib permettant d'avoir un texte riche en gras, italique, souligné etc.)
+à voir
+
+29 février matin :
+Modifications sur Excel report pour afficher les labels en plus du titre de la carte (avec des X)
+
+
+1 au 3 mars :
+1) Correction de plusieurs bug, notamment export Excel qui renvoyait des chiffres étranges, 0,55 était transformé en 0,550000000002 par exemple + tests
+2) Rectification des bugs concernant les tests
+3) Mise en production sur le Server Windows, réglage de quelques bugs + amélioration des tâches rendues
+
+4 mars :
+Mise en production des correctifs effecutés (Board sans colonne, problème avec l'URL d'une API)
+Bug réglé sur une erreur 500 dans le task détail, si on change l'url
+Jusqu'à 15h : tests réalisés sur une partie de l'API (AuthenticationResourceTest)
+
+
+7-8 mars :
+élaboration d'un pop hover qui s'ouvre lorsqu'on cherche à accéder au dernier commentaire
+1 > Modification de l'API > TaskService > TaskServiceImpl
+2 > Modification de TaskSrv pour accéder à l'API
+3 > Modification de BoardCtrl pour récupérer le résultat et créer la directive
+4 > Modification de board.htmt pour afficher le résultat
+5 > Quelques tests unitaire réalisés
+
+
+9 mars :
+
+Modification de CanRead et CanWrite pour autoriser les administrateurs à naviguer à travers les boards et les tâches
+TaskServiceTest pour le getLastComment
+
+10 mars :
+Formation, correction de bugs > possible changements sur le pop over et en attente d'une nouvelle assignation de tâche
+->>>>>>>>>>>>>>>>
+
+
+14 - matin : Upgrade version BootStrap et refonte du popover
+14 - matin + : Drag n Drop SwimLane >> VIEW
+15 - journée : Drag n Drop SwimLane >> VIEW 
+
+16 mars :
+Modification du BackEnd et du FrontEnd afin de pouvoir faire passer en paramètre l'objet SwimLane. La Task reçoit ensuite la nouvelle SwimLane, 
+De base on devrait utiliser la première SwimLane du Board
+Ce qui incite à essayer de développer un moyen de les ordonner, il y a un existant mais il faudra développer d'autant plus cela
+
+17-18 mars
+- Continué sur le projet des SwimLanes
+- Problèmes récurrents 
+//// Correction SuperAdmin (afin de lui laisser tous les privilèges)
+
+
+21 mars :
+
+Création de SwimLane Resource API
+Possibilité d'ajouter une SwimLane, la modifier et la trier
+Possibilité d'ajouter colonne sur LiquiBase?
+
+SwimLane terminé à 50%, manque le choix d'implémentation et détails techniques à voir avec Julien
+
+22 mars :
+
+Modification du board.html pour tenter de modifier complétement le board
+Implémentation de NgCloak pour éviter les pages non compilées (correction plutôt de type Ergonomique)
+TODO : Modifier le pop-over(height)
+	   Modifier la zone pour le pop over (prendre aussi le nombre de comments pour élargir la zone)
+	   Continuer sur les SwimLanes >> trouver une façon d'implémenter plus proprement? à voir
+
+23 mars :
+Réglage de bug, discussions avec mon tuteur
+
+1ère réunion : Kflow ~ TMA
+2ème réunion : Concernant les fonctionnalités à implémenter et discussion sur l'implémentation du Drag N Drop avec filtre
+
+24 mars :
+Matin : Mise en place script SQL pour insérer une soixantaine d'utilisateurs
+Début après-midi : Réglage des bugs : Notify Users dans un premier temps, Problème avec les labels et les colonnes.
+Popover ajustée
+
+
+25 mars :
+Matin : Préparation pour la mise en prod, changement de certaines données
+- Release note
+- Insertion de 60 utilisateurs
+Etc..
+
+
+29 mars :
+
+Matin : Commencer l'implémentation du nouveau Systeme pour les swimLane en suivant les spécifications.
+BoardLoadApi, SwimLaneApi, FlowStatesApi etc..
+
+Après-midi : Reprendre le Drag'n'Drop mais avec les filtres cette fois, modification de BoardCtrl et board.html
+Problèmes rencontrés : Le filtre sur l'ui sortable n'était plus en accord avec le modèle une fois qu'il est actif, du coup les déplacements nétaient pas au point. 
+
+30 mars :
+
+Matin : Résolution du bug (ng-show a été la solution pour moi). 
+Après-midi : amélioration, commit, envoie des tests
+Travaux sur les swimLanes repris pour être plus rapide
+
+
+31 mars :
+
+Matin : 
+Pop-over amélioration, discussion avec Mathieu sur les priorités (SwimLane 1st pour avril puis les notifications)
+
+
+01 avril :
+
+Matinée : 
+Préparation pour la MEP : liste des mails envoyés à Mathieu, MEP à 12h05, 12h10
+
+Après-midi : 
+Upgrade de la version d'AngularJS jusqu'à la 1.5.3, test sur le server Dev déployé par Jenkins. 
+Amélioration du système des swimlanes, il est établi et maintenant fonctionne (les déplacements)
+L'index est à régler par contre
+
+
+04 avril :
+
+Matinée :
+L'index est réglé à environs 10h30 et les tâches se placent correctement où il le faut
+Après-midi :
+Début de l'ajout d'une tâche dans les swimLanes, création de fonction pour récupérer le titre d'une swimLane en fonction de son id. 
+
+05 avril :
+Création de la Task avec une bonne ergonomie 
+
+
+/-----------------------------------Lexique----------------------------------/
+
+adminCtrl : Controlleur de l'administration, récupère les données de adminSrv pour les contrôler et les afficher.
+adminSrv : Communique avec l'API pour récupérer les informations (request/response)
+taskCount : Compter les tâches du board (possibilité de faire un export), un batch multi threadé est lancé toutes les nuits pour relever les informations.
+DueDate : date où doit être réalisée la tâche 
+Trois fichiers excel : TaskCount, Export Excel et Report excel (donc tous différent les uns des autres)
+à compléter..
+
+/------------------------------Rappel----------------------------------------/
+
+Communication concernant Kflow, régler des bugs, écoute...
+Communication sur Slack
+Communication via mail
+
+language: php
+php:
+  - 5.6
+  - 7.0
+
+services:
+- postgresql
+
+before_script :
+- composer install --dev
+- psql -c 'create database green;' -U postgres
+- psql green < sources/sql/db.sql
+
+script: phpunit --stderr tests/ContentTest.php
